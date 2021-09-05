@@ -2,6 +2,7 @@ package com.example.unittesting
 
 import com.example.unittesting.util.Registration
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 
 class RegistrationTest{
