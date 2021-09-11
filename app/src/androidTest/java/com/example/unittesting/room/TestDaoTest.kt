@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.example.unittesting.getOrAwaitValue
+import com.example.unittesting.resource.TestModel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -47,7 +48,7 @@ class TestDaoTest {
 
     @Test
     fun insertData() = runBlockingTest{
-        val item = TestModel(1, "comb", 10, 20.0)
+        val item = TestModel("comb", 10, 20.0, 1)
         dao.insertData(item)
 
         //check the existence of the inserted item
@@ -59,7 +60,7 @@ class TestDaoTest {
 
     @Test
     fun deleteData() = runBlockingTest{
-        val item = TestModel(1, "comb", 10, 20.0)
+        val item = TestModel("comb", 10, 20.0, 1)
         dao.insertData(item)
         dao.deleteData(item)
 
