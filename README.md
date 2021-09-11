@@ -6,4 +6,5 @@ Android Unit Testing Samples
 2. Room database test case
     - DAO test, Live Data
 3. Viewmodels test case
-4. Test with Dagger-Hilt
+    - Coroutine rule, viewmodel
+5. Test with Dagger-Hilt
