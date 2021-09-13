@@ -8,6 +8,8 @@ import androidx.test.filters.SmallTest
 import com.example.unittesting.getOrAwaitValue
 import com.example.unittesting.resource.TestModel
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -15,29 +17,39 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class TestDaoTest {
 
-    // This rule swaps the background task which works asynchronously
-    // become synchronously
+    @get: Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    /** This rule swaps the background task which works asynchronously become synchronously */
     @get: Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database: TestDB
+    /*
+    Inject database for testAppModule.
+    Name to identify which module (TestModule / TestAppModule),
+        we want to inject their db into our testDao test class.
+
+        note: Remove keyword 'private', because we cannot inject into private variables
+     */
+    @Inject
+    @Named("testDB")
+    lateinit var database: TestDB
+
     private lateinit var dao: TestDao
 
     @Before
     fun setup(){
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            TestDB::class.java
-        )
-            .allowMainThreadQueries()
-            .build()
-
+        // This actually make hilt inject all of our dependencies that
+        // annotated with @Inject.
+        hiltRule.inject()
         dao = database.testDao()
     }
 
