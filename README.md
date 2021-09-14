@@ -9,3 +9,5 @@ Android Unit Testing Samples
     - Coroutine rule, viewmodel
 4. Test with Dagger-Hilt
     - HiltRule, CustomApplication for test
+5. Other
+    - LaunchFragmentInHiltContainer
