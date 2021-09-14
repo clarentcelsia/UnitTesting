@@ -6,7 +6,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.example.unittesting.getOrAwaitValue
+import com.example.unittesting.launchFragmentInHiltContainer
 import com.example.unittesting.resource.TestModel
+import com.example.unittesting.ui.fragment.MainFragment
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -56,6 +58,13 @@ class TestDaoTest {
     @After
     fun close(){
         database.close()
+    }
+
+    @Test
+    fun test_launchFragmentInHiltContainer(){
+        launchFragmentInHiltContainer<MainFragment> {
+
+        }
     }
 
     @Test

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.unittesting">
+
+    <application>
+        <activity
+            android:name=".HiltActivity"
+            android:exported="false"> <!-- This activity can only be accessed from debug dir  -->
+        </activity>
+    </application>
+
+</manifest>
